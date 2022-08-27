@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react'
+import AddForm from './components/AddForm'
+import Item from './components/Item'
+
+const initialList = [
+  {title: 'item 1', status: 'incomplete'},
+  {title: 'item 2', status: 'incomplete'},
+  {title: 'item 3', status: 'incomplete'}
+]
 
 function App() {
+
+  const [list, setList] = useState([])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main style={{width: '100%',maxWidth:'800px',marginInline:'auto'}}>
+      <AddForm list={list} setList = {setList} />
+      <ul>
+        {list.map((item, index) => <Item key={index} 
+                                          list={list} 
+                                          setList={setList} 
+                                          title={item.title} 
+                                          status={item.status} 
+                                          index={index}
+                                    />
+          )
+        }
+      </ul>
+
+    </main>
   );
 }
 
